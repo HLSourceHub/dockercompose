@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  # bind mount example
+  linuxgsm-em-bind:
+    image: gameservermanagers/gameserver:em
+    # image: ghcr.io/gameservermanagers/gameserver:em
+    container_name: emserver
+    restart: unless-stopped
+    volumes:
+      - /path/to/linuxgsm/emserver:/data
+    ports:
+      - "27015:27015/tcp"
+      - "27015:27015/udp"
+      - "27020:27020/udp"
+      - "27005:27005/udp"
+    network_mode: host
+
+  # volume example
+  linuxgsm-em-volume:
+    image: gameservermanagers/gameserver:em
+    # image: ghcr.io/gameservermanagers/gameserver:em
+    container_name: emserver
+    restart: unless-stopped
+    volumes:
+      - linuxgsm-em:/data
+    ports:
+      - "27015:27015/tcp"
+      - "27015:27015/udp"
+      - "27020:27020/udp"
+      - "27005:27005/udp"
+    network_mode: host
+
+volumes:
+  linuxgsm-em:
